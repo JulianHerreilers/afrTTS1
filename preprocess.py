@@ -98,7 +98,7 @@ def preprocess_dataset(args):
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
             futures.append(
-                process_wav( wav_path, out_path, cfg["preprocess"])
+                process_wav(wav_path, out_path, cfg["preprocess"])
             )
 
     #results = [future.result() for future in tqdm(futures)]

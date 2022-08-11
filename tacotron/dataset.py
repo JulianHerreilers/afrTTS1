@@ -9,7 +9,7 @@ import torch.utils.data.sampler as samplers
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import Dataset
 
-from .text import load_cmudict, symbol_to_id, text_to_id
+from .text import load_afrdict, symbol_to_id, text_to_id
 
 
 class SortedSampler(samplers.Sampler):
@@ -88,7 +88,7 @@ class TTSDataset(Dataset):
 
         self.index_longest_mel = np.argmax(self.lengths)
 
-        self.cmudict = load_cmudict()
+        self.afrdict = load_afrdict()
 
         train_set = {path.stem for path in self.metadata}
         with open(text_path) as file:
@@ -108,7 +108,7 @@ class TTSDataset(Dataset):
 
         mel = np.load(path.with_suffix(".mel.npy"))
 
-        text = text_to_id(self.text[path.stem], self.cmudict)
+        text = text_to_id(self.text[path.stem], self.afrdict)
 
         return (
             torch.Tensor(mel).transpose_(0, 1),
