@@ -109,10 +109,12 @@ def load_afrdict():
 
     dict_ref = "rcrl_apd.1.4.1.txt"
     dict_file = open(dict_ref, 'r')
-    afrdict = dict_file.readlines()
+    dict_list = dict_file.readlines()
     dict_file.close()
+    afrdict = {}
     for i in range(0, 24174):
-        afrdict[i] = afrdict[i].strip().split()
+        dict_list[i] = dict_list[i].strip().split()
+        afrdict[dict_list[i][0]] = dict_list[i][1:]
     return afrdict
     # dict_ref = "rcrl_apd.1.4.1.txt"
     # with open(dict_ref, 'r') as file:
@@ -136,9 +138,9 @@ def parse_text(text, afrdict):
         raise KeyError(
             f"Please add {out_of_vocab_list} to the pronunciation dictionary."
         )
-
     words = (afrdict[word] if word not in PUNCTUATION else word for word in words)
-    words = (word.split(" ") for word in words)
+    #words = (word.split(" ") for word in words)
+    #print(words)
     words = (x for word in words for x in (word, [" "]))
     symbols = list(symbol for word in words for symbol in word)
     symbols.append("~")
