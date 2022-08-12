@@ -107,8 +107,8 @@ class TTSDataset(Dataset):
         path = self.root / self.metadata[index]
 
         mel = np.load(path.with_suffix(".mel.npy"))
-
-        text = text_to_id(self.text[path.stem], self.afrdict)
+        if(path.stem in self.afrdict):    
+            text = text_to_id(self.text[path.stem], self.afrdict)
 
         return (
             torch.Tensor(mel).transpose_(0, 1),

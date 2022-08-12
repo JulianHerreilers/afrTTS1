@@ -114,16 +114,21 @@ def load_afrdict():
     afrdict = {}
     for i in range(0, 24174):
         dict_list[i] = dict_list[i].strip().split()
-        afrdict[dict_list[i][0]] = dict_list[i][1:]
+        entry = " ".join([str(word) for word in dict_list[i][1:]])
+        afrdict[str(dict_list[i][0])] = entry
     return afrdict
+
+
     # dict_ref = "rcrl_apd.1.4.1.txt"
-    # with open(dict_ref, 'r') as file:
-    # #with open(dict_ref, encoding="ISO-8859-1") as file:
-    #     afrdict = (line.strip().split("  ") for line in islice(file, 0, 24174))
-    # file.close()
-    #     # afrdict = {
-    #     #     format_alt_entry(word): pronunciation for word, pronunciation in afrdict
-    #     # }
+    # with open(dict_ref, encoding="ISO-8859-1") as file:
+    #     afrdict = (line.strip().split("  ") for line in islice(file, 126, 133905))
+    #     print(afrdict)
+    #     afrdict = {
+    #         format_alt_entry(word): pronunciation for word, pronunciation in afrdict
+    #     }
+    #     print(type(afrdict))
+    #     print(afrdict[0])
+    #     print(type(afrdict[0]))
     # return afrdict
 
 
@@ -139,8 +144,7 @@ def parse_text(text, afrdict):
             f"Please add {out_of_vocab_list} to the pronunciation dictionary."
         )
     words = (afrdict[word] if word not in PUNCTUATION else word for word in words)
-    #words = (word.split(" ") for word in words)
-    #print(words)
+    words = (word.split(" ") for word in words)
     words = (x for word in words for x in (word, [" "]))
     symbols = list(symbol for word in words for symbol in word)
     symbols.append("~")

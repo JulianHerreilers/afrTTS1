@@ -188,4 +188,7 @@ if __name__ == "__main__":
         help="Path to the checkpoint to resume from",
     )
     args = parser.parse_args()
+    #args = "afrZA AFRdata/metadata.csv datasets/afrZA"
     train_model(args)
+
+    
