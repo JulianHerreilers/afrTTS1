@@ -107,12 +107,12 @@ def tokenize(text):
 def load_afrdict():
     """Loads the Afr(local) Pronouncing Dictionary"""
 
-    dict_ref = "rcrl_apd.1.4.1.txt"
+    dict_ref = "afr_za_dict.txt"
     dict_file = open(dict_ref, 'r')
     dict_list = dict_file.readlines()
     dict_file.close()
     afrdict = {}
-    for i in range(0, 27746):
+    for i in range(0, len(dict_list)):
         dict_list[i] = dict_list[i].strip().split()
         entry = " ".join([str(word) for word in dict_list[i][1:]])
         afrdict[str(dict_list[i][0])] = entry
