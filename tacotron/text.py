@@ -10,7 +10,7 @@ PUNCTUATION = ['!', ',', '.', '?']
 SYMBOLS = [
     '_', '~', ' ', *PUNCTUATION, '@', 'r', 's', 't', 'n', 'l', 'k', 'x', 'd', 'a',
      'f', 'i', 'A:', 'i@', 'm', 'O', 'p', 'b', 'u@', 'v', '@i', 'N', '{', 'E', 'u',
-      'h\\', 'y', '9', '9y', 'w', 'j', 'S', '2:', '@u', 'g', 'z', 'Z'
+      'h_', 'y', '9', '9y', 'w', 'j', 'S', '2:', '@u', 'g', 'z', 'Z'
 ]
 # fmt: on
 
@@ -112,7 +112,7 @@ def load_afrdict():
     dict_list = dict_file.readlines()
     dict_file.close()
     afrdict = {}
-    for i in range(0, 24174):
+    for i in range(0, 27746):
         dict_list[i] = dict_list[i].strip().split()
         entry = " ".join([str(word) for word in dict_list[i][1:]])
         afrdict[str(dict_list[i][0])] = entry
