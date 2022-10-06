@@ -131,6 +131,8 @@ class G2PModel(nn.Module):
         
         return output, phone_pred_seq
 
+
+
 def cfg_init():
     class Config:
         seed = '5'
