@@ -232,9 +232,7 @@ def DataLoading_forG2P(text_strings):
             words.append(d[i])
             w.append(" ".join(d[i])) 
             p.append(g2p_start[d[i][0]]) # #Starting phone based on starting graph
-        # print(f"w:{words}")
-        # print(f"g:{w}")
-        # print(f"p:{p}")
+            
         return words, w, p
     text_strings = text_strings.lower()
     text_strings = text_strings.replace("-", " ")
@@ -246,10 +244,11 @@ def DataLoading_forG2P(text_strings):
     text_strings = text_strings.replace("?", "")
     text_strings = text_strings.replace(".", "")
     text_strings = text_strings.replace(",", "")
-    train_data_lines = split_nums_letters(text_strings)
-    words, graphemes, phonemes = sortingWP(train_data_lines)
+    text_strings = split_nums_letters(text_strings)
+    processed_string = " ".join(i for i in text_strings)
+    words, graphemes, phonemes = sortingWP(text_strings)
     
-    return words, graphemes, phonemes
+    return words, graphemes, phonemes, processed_string
 
 def padding_data(batch):
 
@@ -327,13 +326,14 @@ def check_if_in_dict(afr_dict, words, graphemes, phonemes):
 
 def process_text_input(model, afr_dict, text_input):
     cfg = cfg_init()
-    data_set_words, data_set_G, data_set_P = DataLoading_forG2P(text_input)
+    data_set_words, data_set_G, data_set_P, processed_string  = DataLoading_forG2P(text_input)
     word_set, data_set_G, data_set_P = check_if_in_dict(afr_dict, data_set_words, data_set_G, data_set_P)
     dataset_to_g2p = G2PData(data_set_G, data_set_P)
     dataset_to_g2p_iter =  data.DataLoader(dataset_to_g2p, batch_size=cfg.batch_size, shuffle=False, collate_fn=padding_data)
     graphemes, phonemes = generate_pd(model, dataset_to_g2p_iter, cfg.device)
     for g,p in zip(graphemes,phonemes):
         afr_dict[g] = p
+    return processed_string
     #return graphemes, phonemes
 
 
