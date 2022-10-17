@@ -223,7 +223,7 @@ def generate_pd(model, iter, device):
     return words,pronunciations 
 
 def DataLoading_forG2P(text_strings):
-    g2p_start = {"a": "A:", "b": "b", "c":"k", "d":"d", "e":"E", "f":"f", "g":"x", "h":"h_", "i":"i",
+    g2p_start = {"a": "a", "b": "b", "c":"k", "d":"d", "e":"E", "f":"f", "g":"x", "h":"h_", "i":"i",
     "j": "j", "k":"k", "l":"l", "m":"m", "n":"n", "o":"O", "p":"p", "q":"k", "r":"r", "s":"s",
     "t":"t", "u":"9y", "v":"f", "w":"v", "x":"z", "y":"@i", "z":"z", "\'":"A:" }
     def sortingWP (d):
