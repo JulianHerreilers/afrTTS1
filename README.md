@@ -2,5 +2,5 @@
 Afrikaans-based G2P and text-to-speech synthesis
 
 Acknowledegments: <br />
-*https://github.com/bshall/Tacotron <br />
-*https://github.com/bshall/UniversalVocoding <br />
+-https://github.com/bshall/Tacotron <br />
+-https://github.com/bshall/UniversalVocoding <br />
